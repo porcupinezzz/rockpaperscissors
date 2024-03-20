@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function playRound(playerSelection, computerSelection) {
+        // your code here!
+            if (playerSelection == computerSelection) {
+                return "Draw";
+            }
+            let select = {'rock':0, 'paper': 1, 'scissors':2};
+            let lose = ['paper', 'scissors', 'rock'];
+            let num = select[/playerSelection/i];
+            if (computerSelection == lose[num]){
+                return "player loses";
+            }
+            else{
+                return "player wins";
+            }
+        }
+        function getComputerChoice(){
+            let choice = ['rock', 'paper', 'scissors'];
+            let num;
+            num = Math.floor(Math.random() * 3);
+            return choice[num];
+        }
+        const playerSelection = "rock";
+        const computerSelection = getComputerChoice();
+        console.log(computerSelection);
+        console.log(playRound(playerSelection, computerSelection));
+        let playerChoice;
+        function playGame(){
+            playerChoice = prompt("select your move : ");
+            console.log(playRound(playerChoice, getComputerChoice())); 
+            playerChoice = prompt("select your move : ");
+            console.log(playRound(playerChoice, getComputerChoice())); 
+            playerChoice = prompt("select your move : ");
+            console.log(playRound(playerChoice, getComputerChoice())); 
+            playerChoice = prompt("select your move : ");
+            console.log(playRound(playerChoice, getComputerChoice())); 
+            playerChoice = prompt("select your move : ");
+            console.log(playRound(playerChoice, getComputerChoice())); 
+        }
+        playGame();
+    </script>
+</body>
+</html>
