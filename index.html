@@ -6,7 +6,15 @@
     <title>Document</title>
 </head>
 <body>
+    <button class = "rock">Rock</button>
+    <button class = "paper">Paper</button>
+    <button class = "scissors">Scissors</button>
+    <div class = "display"></div>
     <script>
+        let buttons = document.querySelectorAll("button");
+        let display = document.querySelector(".display");
+        let playerScore = 0;
+        let computerScore = 0;
         function playRound(playerSelection, computerSelection) {
         // your code here!
             if (playerSelection == computerSelection) {
@@ -14,7 +22,7 @@
             }
             let select = {'rock':0, 'paper': 1, 'scissors':2};
             let lose = ['paper', 'scissors', 'rock'];
-            let num = select[/playerSelection/i];
+            let num = select[playerSelection];
             if (computerSelection == lose[num]){
                 return "player loses";
             }
@@ -28,24 +36,32 @@
             num = Math.floor(Math.random() * 3);
             return choice[num];
         }
-        const playerSelection = "rock";
-        const computerSelection = getComputerChoice();
-        console.log(computerSelection);
-        console.log(playRound(playerSelection, computerSelection));
-        let playerChoice;
-        function playGame(){
-            playerChoice = prompt("select your move : ");
-            console.log(playRound(playerChoice, getComputerChoice())); 
-            playerChoice = prompt("select your move : ");
-            console.log(playRound(playerChoice, getComputerChoice())); 
-            playerChoice = prompt("select your move : ");
-            console.log(playRound(playerChoice, getComputerChoice())); 
-            playerChoice = prompt("select your move : ");
-            console.log(playRound(playerChoice, getComputerChoice())); 
-            playerChoice = prompt("select your move : ");
-            console.log(playRound(playerChoice, getComputerChoice())); 
-        }
-        playGame();
+        buttons.forEach((button) => {
+            button.addEventListener("click", function(e){
+                let playerChoice = e.target.getAttribute("class");
+                let computerChoice = getComputerChoice();
+                let outcome = playRound(playerChoice, computerChoice);
+                if (outcome == "player wins"){
+                    playerScore += 1;
+                }
+                if (outcome == "player loses"){
+                    computerScore += 1;
+                }
+                let statement = "Player Choice: " + playerChoice + ", Computer Choice: " + computerChoice + ", Result: " + outcome + ". Player Score: " + playerScore + " Computer Score: " + computerScore;
+                const entry = document.createElement("p");
+                entry.textContent = statement;
+                display.appendChild(entry);
+                let finalStatement = document.createElement("p");
+                if (playerScore == 5){
+                    finalStatement.textContent = "Player Wins";
+                    display.appendChild(finalStatement);
+                }
+                if (computerScore == 5){
+                    finalStatement.textContent = "Computer Wins";
+                    display.appendChild(finalStatement);
+                }
+            })
+        })
     </script>
 </body>
 </html>
